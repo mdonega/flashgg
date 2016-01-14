@@ -21,7 +21,7 @@ if doSystematics:
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1))
-process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32( 1 )
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32( 1000 )
 process.source = cms.Source ("PoolSource",
                              fileNames = cms.untracked.vstring(
 #        "root://eoscms.cern.ch//eos/cms/store/group/phys_higgs/cmshgg/sethzenz/flashgg/RunIISpring15-ReMiniAOD-1_1_0-25ns/1_1_0/VBFHToGG_M-125_13TeV_powheg_pythia8/RunIISpring15-ReMiniAOD-1_1_0-25ns-1_1_0-v0-RunIISpring15MiniAODv2-74X_mcRun2_asymptotic_v2-v1/160105_224017/0000/myMicroAODOutputFile_1.root"
@@ -118,32 +118,35 @@ else:
 # get the variable list
 import flashgg.Taggers.VBFTagVariables as var
 new_variables = [
-    "prompt_pho_1  := diPhoton.leadingPhoton.genMatchType()",
-    "prompt_pho_2  := diPhoton.subLeadingPhoton.genMatchType()",
-    "n_jets        := VBFMVA.n_rec_jets"
-    #"jet1_btag := leadingJet_ptr.bDiscriminator(\"pfCombinedInclusiveSecondaryVertexV2BJetTags\")",
-    #"jet2_btag := subLeadingJet_ptr.bDiscriminator(\"pfCombinedInclusiveSecondaryVertexV2BJetTags\")"
+    "prompt_pho_1   := diPhoton.leadingPhoton.genMatchType()",
+    "prompt_pho_2   := diPhoton.subLeadingPhoton.genMatchType()",
+    "n_jets         := VBFMVA.n_rec_jets",
+    "dijet_jet1_RMS := leadingJet_ptr.rms()",
+    "dijet_jet2_RMS := subLeadingJet_ptr.rms()"
+    #"dijet_jet1_QGL := leadingJet_ptr.QGL()",
+    #"dijet_jet2_QGL := subLeadingJet_ptr.QGL()"
+    #"jet1_btag     := leadingJet_ptr.bDiscriminator(\"pfCombinedInclusiveSecondaryVertexV2BJetTags\")",
+    #"jet2_btag     := subLeadingJet_ptr.bDiscriminator(\"pfCombinedInclusiveSecondaryVertexV2BJetTags\")"
     ]
 all_variables = var.dijet_variables + var.dipho_variables + new_variables #var.truth_variables
 if customize.processId != "Data":
     all_variables += var.truth_variables
 
-
 cats = []
 if doSystematics:
     for syst in jetsystlabels:
         systcutstring = "hasSyst(\"%s\") "%syst
-        cats += [("VBFDiJet_%s"%syst,"leadingJet.pt>0&&%s"%systcutstring,0),
-                 ("excluded_%s"%syst,systcutstring,0)]
+        cats += [("VBFDiJet_%s"%syst,"leadingJet.pt>0&&%s"%systcutstring,0)]#,
+                 #("excluded_%s"%syst,systcutstring,0)]
 else:
     cats = [
-                    ("VBFDiJet","leadingJet.pt>0",0),
-                    ("excluded","1",0)
+                    ("VBFDiJet","leadingJet.pt>0",0)#,
+                    #("excluded","1",0)
                     ]
 
 cats += [
-    ("VBFDiJet","leadingJet.pt>0",0),
-    ("excluded","1",0)
+    ("VBFDiJet","leadingJet.pt>0",0)#,
+    #("excluded","1",0)
     ]
 
 cfgTools.addCategories(process.vbfTagDumper,
@@ -158,8 +161,8 @@ print cats
 #process.vbfTagDumper.nameTemplate ="$PROCESS_$SQRTS_$LABEL_$SUBCAT_$CLASSNAME"
 process.vbfTagDumper.nameTemplate = "$PROCESS_$SQRTS_$CLASSNAME_$SUBCAT_$LABEL"
 
-customize.setDefault("maxEvents" , 1000     ) # max-number of events
-customize.setDefault("targetLumi", 2.56e+3  ) # define integrated lumi
+customize.setDefault("maxEvents" , -1     ) # max-number of events
+customize.setDefault("targetLumi", 1.00e+3  ) # define integrated lumi
 customize(process)
 
 from HLTrigger.HLTfilters.hltHighLevel_cfi import hltHighLevel

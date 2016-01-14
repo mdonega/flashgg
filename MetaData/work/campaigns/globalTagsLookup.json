@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "Run2015D"                          : ["74X_dataRun2_v5"],
     "Run2015C"                          : ["74X_dataRun2_v5"],
     "Run2015B"                          : ["74X_dataRun2_v5"],
@@ -9,9 +8,5 @@
     "Run2015D-05Oct2015" : ["74X_dataRun2_v5"],
     "Run2015C_25ns-05Oct2015" : ["74X_dataRun2_v5"],
     "RunIISpring15MiniAODv2-74X_mcRun2_asymptotic_v2" : ["74X_mcRun2_asymptotic_v4"]
-=======
-    "Run2015B-PromptReco"                          : ["GR_P_V56::All"],
-    "RunIISpring15DR74-Asympt50ns_MCRUN2_74_V9A"   : ["MCRUN2_74_V9A::All"],
-    "RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9"	   : ["MCRUN2_74_V9::All"]
->>>>>>> 5808662826fa28e3d5eb528cbdd47c69b04313b8
+    "Run2015D-04Dec2015" : ["74X_dataRun2_v5"]
 }
