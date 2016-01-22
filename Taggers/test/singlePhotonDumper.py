@@ -8,7 +8,7 @@ from flashgg.MetaData.samples_utils import SamplesManager
 process = cms.Process("FWLitePlots")
 
 process.source = cms.Source("PoolSource",
-                            fileNames=cms.untracked.vstring("file:myMicroAODOutputFile.root")
+                            fileNames=cms.untracked.vstring("file:/afs/cern.ch/user/m/mdonega/work/CMSSW_7_6_3/src/flashgg/myMicroAODOutputFile.root")
 )
 
 process.fwliteInput = cms.PSet(

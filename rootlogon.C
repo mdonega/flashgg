@@ -1,6 +1,7 @@
 {
     gSystem->Load( "libFWCoreFWLite.so" );
-    AutoLibraryLoader::enable();
+    // AutoLibraryLoader::enable(); // deprecated
+    FWLiteEnabler::enable();
     gSystem->Load( "libDataFormatsFWLite.so" );
     gSystem->Load( "libDataFormatsPatCandidates.so" );
 }
