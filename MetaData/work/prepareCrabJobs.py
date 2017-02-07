@@ -260,7 +260,6 @@ if options.createCrabConfig:
         ###         PrimaryDataset = PrimaryDataset +"-"+ ProcessedDataset[position:]
             
         jobname = "_".join([flashggVersion, PrimaryDataset, ProcessedDataset])
-        orig_jobname = jobname
         if len(jobname) > 97:
             jobname = jobname.replace("TuneCUEP8M1_13TeV-pythia8","13TeV")
         if len(jobname) > 97:
@@ -302,7 +301,11 @@ if options.createCrabConfig:
         if len(jobname) > 97:
             jobname = jobname.replace("asymptotic_2016","asym16")
         if len(jobname) > 97:
-            jobname = jobname.replace("reHLT_80X_mcRun2_asymptotic_v14-v1","reHLTasym16")
+            jobname = jobname.replace("reHLT_80X_mcRun2_asymptotic_v14-v1","reHLTasym16")                                                                                           if len(jobname) > 97:                                                                                                                                                           jobname = jobname.replace("_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1","reHLTasym16")         
+        ### if len(jobname) > 97:
+        ###     print orig_jobname
+        ###     print "-->", len(jobname), jobname
+        ###     raise Exception
         if len(jobname) > 97:
             jobname = jobname.replace("_withHLT_80X_mcRun2_asymptotic_v14_ext1-v1","reHLTasym16")
         if len(jobname) > 97:
