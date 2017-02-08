@@ -6,6 +6,7 @@
 <use   name="FWCore/Utilities"/>
 <use   name="CommonTools/Utils"/>
 <use   name="PhysicsTools/UtilAlgos"/>
+<use   name="RecoEgamma/EgammaTools"/>
 <use   name="roofit"/>
 <use   name="roottmva"/>
 <use   name="RecoEgamma/EgammaTools"/>
